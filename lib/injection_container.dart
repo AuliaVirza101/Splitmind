@@ -18,7 +18,10 @@ import 'features/group/data/models/group_model.dart';
 import 'features/group/data/repositories/group_repository_impl.dart';
 import 'features/group/domain/repositories/group_repository.dart';
 import 'features/group/domain/usecases/group_usecases.dart';
-import 'features/settlement/data/models/settlement_model.dart';
+import 'features/settlement/data/datasources/settlement_local_datasource.dart';
+import 'features/settlement/data/repositories/settlement_repository_impl.dart';
+import 'features/settlement/domain/repositories/settlement_repository.dart';
+import 'features/settlement/domain/usecases/settlement_usecases.dart';
 
 final sl = GetIt.instance;
 
@@ -66,4 +69,13 @@ Future<void> init() async {
   sl.registerLazySingleton(() => DeleteExpense(sl()));
   sl.registerLazySingleton(() => CalculateSplit());
   sl.registerLazySingleton(() => SimplifyDebts());
+
+  // ---------------------------------------------------------------------------
+  // Features - Settlement
+  // ---------------------------------------------------------------------------
+  sl.registerLazySingleton(() => SettlementLocalDatasource(sl()));
+  sl.registerLazySingleton<SettlementRepository>(() => SettlementRepositoryImpl(sl()));
+  sl.registerLazySingleton(() => CreateSettlement(sl()));
+  sl.registerLazySingleton(() => ConfirmSettlement(sl()));
+  sl.registerLazySingleton(() => GetGroupSettlements(sl()));
 }
