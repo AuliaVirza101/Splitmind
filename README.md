@@ -1,2 +1,11 @@
-# Splitmind
-An app for splitting bills among groups (friends, family, teams) but with a twist  it has AI that can scan receipts via camera, automatically parse items, and then suggest a “fair” split based on who ate/bought what.
+# SplitMind
+
+SplitMind is an AI-powered bill splitting application that eliminates the hassle of manual inputs, unfair splits, and awkward debt collection.
+
+## Core Features
+- **AI Receipt Scanning (OCR)**: Automatically parse items from a receipt photo.
+- **Fair Item-Based Splitting**: Pay only for what you actually ordered.
+- **Debt Simplification**: Condense complex group debts into simple, direct payments.
+- **Smart Reminders & Insights**: Friendly debt reminders and spending analytics.
+
+*Built with Flutter, AI, and Offline Support.*
