@@ -1,0 +1,1670 @@
+// **************************************************************************
+// IsarCollectionGenerator
+// **************************************************************************
+
+// coverage:ignore-file
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
+
+extension GetSettlementModelCollection on Isar {
+  IsarCollection<SettlementModel> get settlementModels => this.collection();
+}
+
+const SettlementModelSchema = CollectionSchema(
+  name: r'SettlementModel',
+  id: -6970418572406353937,
+  properties: {
+    r'amount': PropertySchema(
+      id: 0,
+      name: r'amount',
+      type: IsarType.double,
+    ),
+    r'confirmedAt': PropertySchema(
+      id: 1,
+      name: r'confirmedAt',
+      type: IsarType.dateTime,
+    ),
+    r'createdAt': PropertySchema(
+      id: 2,
+      name: r'createdAt',
+      type: IsarType.dateTime,
+    ),
+    r'fromUserId': PropertySchema(
+      id: 3,
+      name: r'fromUserId',
+      type: IsarType.string,
+    ),
+    r'groupId': PropertySchema(
+      id: 4,
+      name: r'groupId',
+      type: IsarType.string,
+    ),
+    r'proofImagePath': PropertySchema(
+      id: 5,
+      name: r'proofImagePath',
+      type: IsarType.string,
+    ),
+    r'toUserId': PropertySchema(
+      id: 6,
+      name: r'toUserId',
+      type: IsarType.string,
+    ),
+    r'uid': PropertySchema(
+      id: 7,
+      name: r'uid',
+      type: IsarType.string,
+    )
+  },
+  estimateSize: _settlementModelEstimateSize,
+  serialize: _settlementModelSerialize,
+  deserialize: _settlementModelDeserialize,
+  deserializeProp: _settlementModelDeserializeProp,
+  idName: r'id',
+  indexes: {
+    r'uid': IndexSchema(
+      id: 8193695471701937315,
+      name: r'uid',
+      unique: true,
+      replace: true,
+      properties: [
+        IndexPropertySchema(
+          name: r'uid',
+          type: IndexType.hash,
+          caseSensitive: true,
+        )
+      ],
+    )
+  },
+  links: {},
+  embeddedSchemas: {},
+  getId: _settlementModelGetId,
+  getLinks: _settlementModelGetLinks,
+  attach: _settlementModelAttach,
+  version: '3.1.0+1',
+);
+
+int _settlementModelEstimateSize(
+  SettlementModel object,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  var bytesCount = offsets.last;
+  bytesCount += 3 + object.fromUserId.length * 3;
+  bytesCount += 3 + object.groupId.length * 3;
+  {
+    final value = object.proofImagePath;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  bytesCount += 3 + object.toUserId.length * 3;
+  bytesCount += 3 + object.uid.length * 3;
+  return bytesCount;
+}
+
+void _settlementModelSerialize(
+  SettlementModel object,
+  IsarWriter writer,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  writer.writeDouble(offsets[0], object.amount);
+  writer.writeDateTime(offsets[1], object.confirmedAt);
+  writer.writeDateTime(offsets[2], object.createdAt);
+  writer.writeString(offsets[3], object.fromUserId);
+  writer.writeString(offsets[4], object.groupId);
+  writer.writeString(offsets[5], object.proofImagePath);
+  writer.writeString(offsets[6], object.toUserId);
+  writer.writeString(offsets[7], object.uid);
+}
+
+SettlementModel _settlementModelDeserialize(
+  Id id,
+  IsarReader reader,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  final object = SettlementModel();
+  object.amount = reader.readDouble(offsets[0]);
+  object.confirmedAt = reader.readDateTimeOrNull(offsets[1]);
+  object.createdAt = reader.readDateTime(offsets[2]);
+  object.fromUserId = reader.readString(offsets[3]);
+  object.groupId = reader.readString(offsets[4]);
+  object.id = id;
+  object.proofImagePath = reader.readStringOrNull(offsets[5]);
+  object.toUserId = reader.readString(offsets[6]);
+  object.uid = reader.readString(offsets[7]);
+  return object;
+}
+
+P _settlementModelDeserializeProp<P>(
+  IsarReader reader,
+  int propertyId,
+  int offset,
+  Map<Type, List<int>> allOffsets,
+) {
+  switch (propertyId) {
+    case 0:
+      return (reader.readDouble(offset)) as P;
+    case 1:
+      return (reader.readDateTimeOrNull(offset)) as P;
+    case 2:
+      return (reader.readDateTime(offset)) as P;
+    case 3:
+      return (reader.readString(offset)) as P;
+    case 4:
+      return (reader.readString(offset)) as P;
+    case 5:
+      return (reader.readStringOrNull(offset)) as P;
+    case 6:
+      return (reader.readString(offset)) as P;
+    case 7:
+      return (reader.readString(offset)) as P;
+    default:
+      throw IsarError('Unknown property with id $propertyId');
+  }
+}
+
+Id _settlementModelGetId(SettlementModel object) {
+  return object.id;
+}
+
+List<IsarLinkBase<dynamic>> _settlementModelGetLinks(SettlementModel object) {
+  return [];
+}
+
+void _settlementModelAttach(
+    IsarCollection<dynamic> col, Id id, SettlementModel object) {
+  object.id = id;
+}
+
+extension SettlementModelByIndex on IsarCollection<SettlementModel> {
+  Future<SettlementModel?> getByUid(String uid) {
+    return getByIndex(r'uid', [uid]);
+  }
+
+  SettlementModel? getByUidSync(String uid) {
+    return getByIndexSync(r'uid', [uid]);
+  }
+
+  Future<bool> deleteByUid(String uid) {
+    return deleteByIndex(r'uid', [uid]);
+  }
+
+  bool deleteByUidSync(String uid) {
+    return deleteByIndexSync(r'uid', [uid]);
+  }
+
+  Future<List<SettlementModel?>> getAllByUid(List<String> uidValues) {
+    final values = uidValues.map((e) => [e]).toList();
+    return getAllByIndex(r'uid', values);
+  }
+
+  List<SettlementModel?> getAllByUidSync(List<String> uidValues) {
+    final values = uidValues.map((e) => [e]).toList();
+    return getAllByIndexSync(r'uid', values);
+  }
+
+  Future<int> deleteAllByUid(List<String> uidValues) {
+    final values = uidValues.map((e) => [e]).toList();
+    return deleteAllByIndex(r'uid', values);
+  }
+
+  int deleteAllByUidSync(List<String> uidValues) {
+    final values = uidValues.map((e) => [e]).toList();
+    return deleteAllByIndexSync(r'uid', values);
+  }
+
+  Future<Id> putByUid(SettlementModel object) {
+    return putByIndex(r'uid', object);
+  }
+
+  Id putByUidSync(SettlementModel object, {bool saveLinks = true}) {
+    return putByIndexSync(r'uid', object, saveLinks: saveLinks);
+  }
+
+  Future<List<Id>> putAllByUid(List<SettlementModel> objects) {
+    return putAllByIndex(r'uid', objects);
+  }
+
+  List<Id> putAllByUidSync(List<SettlementModel> objects,
+      {bool saveLinks = true}) {
+    return putAllByIndexSync(r'uid', objects, saveLinks: saveLinks);
+  }
+}
+
+extension SettlementModelQueryWhereSort
+    on QueryBuilder<SettlementModel, SettlementModel, QWhere> {
+  QueryBuilder<SettlementModel, SettlementModel, QAfterWhere> anyId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(const IdWhereClause.any());
+    });
+  }
+}
+
+extension SettlementModelQueryWhere
+    on QueryBuilder<SettlementModel, SettlementModel, QWhereClause> {
+  QueryBuilder<SettlementModel, SettlementModel, QAfterWhereClause> idEqualTo(
+      Id id) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IdWhereClause.between(
+        lower: id,
+        upper: id,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterWhereClause>
+      idNotEqualTo(Id id) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(
+              IdWhereClause.lessThan(upper: id, includeUpper: false),
+            )
+            .addWhereClause(
+              IdWhereClause.greaterThan(lower: id, includeLower: false),
+            );
+      } else {
+        return query
+            .addWhereClause(
+              IdWhereClause.greaterThan(lower: id, includeLower: false),
+            )
+            .addWhereClause(
+              IdWhereClause.lessThan(upper: id, includeUpper: false),
+            );
+      }
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterWhereClause>
+      idGreaterThan(Id id, {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IdWhereClause.greaterThan(lower: id, includeLower: include),
+      );
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterWhereClause> idLessThan(
+      Id id,
+      {bool include = false}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(
+        IdWhereClause.lessThan(upper: id, includeUpper: include),
+      );
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterWhereClause> idBetween(
+    Id lowerId,
+    Id upperId, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IdWhereClause.between(
+        lower: lowerId,
+        includeLower: includeLower,
+        upper: upperId,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterWhereClause> uidEqualTo(
+      String uid) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'uid',
+        value: [uid],
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterWhereClause>
+      uidNotEqualTo(String uid) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'uid',
+              lower: [],
+              upper: [uid],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'uid',
+              lower: [uid],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'uid',
+              lower: [uid],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'uid',
+              lower: [],
+              upper: [uid],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
+}
+
+extension SettlementModelQueryFilter
+    on QueryBuilder<SettlementModel, SettlementModel, QFilterCondition> {
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      amountEqualTo(
+    double value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'amount',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      amountGreaterThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'amount',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      amountLessThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'amount',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      amountBetween(
+    double lower,
+    double upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'amount',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      confirmedAtIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'confirmedAt',
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      confirmedAtIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'confirmedAt',
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      confirmedAtEqualTo(DateTime? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'confirmedAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      confirmedAtGreaterThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'confirmedAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      confirmedAtLessThan(
+    DateTime? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'confirmedAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      confirmedAtBetween(
+    DateTime? lower,
+    DateTime? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'confirmedAt',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      createdAtEqualTo(DateTime value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'createdAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      createdAtGreaterThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'createdAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      createdAtLessThan(
+    DateTime value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'createdAt',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      createdAtBetween(
+    DateTime lower,
+    DateTime upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'createdAt',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      fromUserIdEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'fromUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      fromUserIdGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'fromUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      fromUserIdLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'fromUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      fromUserIdBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'fromUserId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      fromUserIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'fromUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      fromUserIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'fromUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      fromUserIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'fromUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      fromUserIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'fromUserId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      fromUserIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'fromUserId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      fromUserIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'fromUserId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      groupIdEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'groupId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      groupIdGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'groupId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      groupIdLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'groupId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      groupIdBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'groupId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      groupIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'groupId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      groupIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'groupId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      groupIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'groupId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      groupIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'groupId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      groupIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'groupId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      groupIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'groupId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      idEqualTo(Id value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'id',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      idGreaterThan(
+    Id value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'id',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      idLessThan(
+    Id value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'id',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      idBetween(
+    Id lower,
+    Id upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'id',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      proofImagePathIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'proofImagePath',
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      proofImagePathIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'proofImagePath',
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      proofImagePathEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'proofImagePath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      proofImagePathGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'proofImagePath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      proofImagePathLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'proofImagePath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      proofImagePathBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'proofImagePath',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      proofImagePathStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'proofImagePath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      proofImagePathEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'proofImagePath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      proofImagePathContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'proofImagePath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      proofImagePathMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'proofImagePath',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      proofImagePathIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'proofImagePath',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      proofImagePathIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'proofImagePath',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      toUserIdEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'toUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      toUserIdGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'toUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      toUserIdLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'toUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      toUserIdBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'toUserId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      toUserIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'toUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      toUserIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'toUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      toUserIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'toUserId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      toUserIdMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'toUserId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      toUserIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'toUserId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      toUserIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'toUserId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      uidEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'uid',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      uidGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'uid',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      uidLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'uid',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      uidBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'uid',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      uidStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'uid',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      uidEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'uid',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      uidContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'uid',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      uidMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'uid',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      uidIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'uid',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterFilterCondition>
+      uidIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'uid',
+        value: '',
+      ));
+    });
+  }
+}
+
+extension SettlementModelQueryObject
+    on QueryBuilder<SettlementModel, SettlementModel, QFilterCondition> {}
+
+extension SettlementModelQueryLinks
+    on QueryBuilder<SettlementModel, SettlementModel, QFilterCondition> {}
+
+extension SettlementModelQuerySortBy
+    on QueryBuilder<SettlementModel, SettlementModel, QSortBy> {
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy> sortByAmount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'amount', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      sortByAmountDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'amount', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      sortByConfirmedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'confirmedAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      sortByConfirmedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'confirmedAt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      sortByCreatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      sortByCreatedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      sortByFromUserId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'fromUserId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      sortByFromUserIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'fromUserId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy> sortByGroupId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'groupId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      sortByGroupIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'groupId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      sortByProofImagePath() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'proofImagePath', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      sortByProofImagePathDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'proofImagePath', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      sortByToUserId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'toUserId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      sortByToUserIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'toUserId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy> sortByUid() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uid', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy> sortByUidDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uid', Sort.desc);
+    });
+  }
+}
+
+extension SettlementModelQuerySortThenBy
+    on QueryBuilder<SettlementModel, SettlementModel, QSortThenBy> {
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy> thenByAmount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'amount', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      thenByAmountDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'amount', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      thenByConfirmedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'confirmedAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      thenByConfirmedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'confirmedAt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      thenByCreatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      thenByCreatedAtDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'createdAt', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      thenByFromUserId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'fromUserId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      thenByFromUserIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'fromUserId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy> thenByGroupId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'groupId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      thenByGroupIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'groupId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy> thenById() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'id', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy> thenByIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'id', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      thenByProofImagePath() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'proofImagePath', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      thenByProofImagePathDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'proofImagePath', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      thenByToUserId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'toUserId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy>
+      thenByToUserIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'toUserId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy> thenByUid() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uid', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QAfterSortBy> thenByUidDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'uid', Sort.desc);
+    });
+  }
+}
+
+extension SettlementModelQueryWhereDistinct
+    on QueryBuilder<SettlementModel, SettlementModel, QDistinct> {
+  QueryBuilder<SettlementModel, SettlementModel, QDistinct> distinctByAmount() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'amount');
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QDistinct>
+      distinctByConfirmedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'confirmedAt');
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QDistinct>
+      distinctByCreatedAt() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'createdAt');
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QDistinct>
+      distinctByFromUserId({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'fromUserId', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QDistinct> distinctByGroupId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'groupId', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QDistinct>
+      distinctByProofImagePath({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'proofImagePath',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QDistinct> distinctByToUserId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'toUserId', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<SettlementModel, SettlementModel, QDistinct> distinctByUid(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'uid', caseSensitive: caseSensitive);
+    });
+  }
+}
+
+extension SettlementModelQueryProperty
+    on QueryBuilder<SettlementModel, SettlementModel, QQueryProperty> {
+  QueryBuilder<SettlementModel, int, QQueryOperations> idProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<SettlementModel, double, QQueryOperations> amountProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'amount');
+    });
+  }
+
+  QueryBuilder<SettlementModel, DateTime?, QQueryOperations>
+      confirmedAtProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'confirmedAt');
+    });
+  }
+
+  QueryBuilder<SettlementModel, DateTime, QQueryOperations>
+      createdAtProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'createdAt');
+    });
+  }
+
+  QueryBuilder<SettlementModel, String, QQueryOperations> fromUserIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'fromUserId');
+    });
+  }
+
+  QueryBuilder<SettlementModel, String, QQueryOperations> groupIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'groupId');
+    });
+  }
+
+  QueryBuilder<SettlementModel, String?, QQueryOperations>
+      proofImagePathProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'proofImagePath');
+    });
+  }
+
+  QueryBuilder<SettlementModel, String, QQueryOperations> toUserIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'toUserId');
+    });
+  }
+
+  QueryBuilder<SettlementModel, String, QQueryOperations> uidProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'uid');
+    });
+  }
+}
