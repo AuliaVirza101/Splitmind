@@ -10,14 +10,14 @@ Aplikasi pengelola keuangan biasanya butuh warna yang memberi kesan "Aman", "Jel
 
 ### Primary Colors
 *Warna utama aplikasi, branding, tombol aksi utama.*
-- **Primary:** `#6366F1` (Indigo Glow) — *Warna utama, modern, trustworthy.*
-- **Primary Variant:** `#4F46E5` (Deep Indigo) — *Untuk efek tekan (pressed state) atau teks di atas background light.*
+- **Primary:** `#3B82F6` (Trust Blue) — *Warna biru muda, melambangkan keamanan, kepercayaan, dan ketenangan.*
+- **Primary Variant:** `#2563EB` (Deep Trust Blue) — *Untuk efek tekan (pressed state) atau teks di atas background light.*
 - **On Primary:** `#FFFFFF` — *Warna teks di atas warna primary.*
 
 ### Secondary / Accent Colors
 *Warna pendukung untuk highlight, badge, atau illustrasi.*
-- **Secondary:** `#10B981` (Emerald Green) — *Kesan uang, sukses, balance positif.*
-- **Secondary Variant:** `#059669` (Deep Emerald)
+- **Secondary:** `#14B8A6` (Teal Safe) — *Kesan uang, aman, dan balance positif tapi lebih kalem dari hijau biasa.*
+- **Secondary Variant:** `#0D9488` (Deep Teal)
 - **On Secondary:** `#FFFFFF`
 
 ### Semantic / Status Colors
@@ -128,8 +128,8 @@ Di Flutter, ini akan di-translate jadi `ThemeData` class.
 final ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.light(
-    primary: const Color(0xFF6366F1),
-    secondary: const Color(0xFF10B981),
+    primary: const Color(0xFF3B82F6),
+    secondary: const Color(0xFF14B8A6),
     surface: const Color(0xFFFFFFFF),
     background: const Color(0xFFF8FAFC),
     error: const Color(0xFFEF4444),
