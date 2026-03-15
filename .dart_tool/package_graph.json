@@ -15,8 +15,8 @@
         "get_it",
         "go_router",
         "google_fonts",
-        "isar",
-        "isar_flutter_libs",
+        "hive",
+        "hive_flutter",
         "logger",
         "path_provider",
         "uuid"
@@ -25,7 +25,7 @@
         "build_runner",
         "flutter_lints",
         "flutter_test",
-        "isar_generator",
+        "hive_generator",
         "mockito",
         "riverpod_generator"
       ]
@@ -88,18 +88,14 @@
       ]
     },
     {
-      "name": "isar_generator",
-      "version": "3.1.0+1",
+      "name": "hive_generator",
+      "version": "2.0.1",
       "dependencies": [
         "analyzer",
         "build",
-        "dart_style",
-        "dartx",
-        "glob",
-        "isar",
-        "path",
+        "hive",
         "source_gen",
-        "xxh3"
+        "source_helper"
       ]
     },
     {
@@ -202,19 +198,20 @@
       ]
     },
     {
-      "name": "isar_flutter_libs",
-      "version": "3.1.0+1",
+      "name": "hive_flutter",
+      "version": "1.1.0",
       "dependencies": [
         "flutter",
-        "isar"
+        "hive",
+        "path",
+        "path_provider"
       ]
     },
     {
-      "name": "isar",
-      "version": "3.1.0+1",
+      "name": "hive",
+      "version": "2.2.3",
       "dependencies": [
-        "ffi",
-        "js",
+        "crypto",
         "meta"
       ]
     },
@@ -456,31 +453,12 @@
       ]
     },
     {
-      "name": "xxh3",
-      "version": "1.2.0",
-      "dependencies": []
-    },
-    {
-      "name": "glob",
-      "version": "2.1.3",
+      "name": "source_helper",
+      "version": "1.3.5",
       "dependencies": [
-        "async",
+        "analyzer",
         "collection",
-        "file",
-        "path",
-        "string_scanner"
-      ]
-    },
-    {
-      "name": "dartx",
-      "version": "1.2.0",
-      "dependencies": [
-        "characters",
-        "collection",
-        "crypto",
-        "meta",
-        "path",
-        "time"
+        "source_gen"
       ]
     },
     {
@@ -615,6 +593,17 @@
       "version": "2.3.2",
       "dependencies": [
         "collection"
+      ]
+    },
+    {
+      "name": "glob",
+      "version": "2.1.3",
+      "dependencies": [
+        "async",
+        "collection",
+        "file",
+        "path",
+        "string_scanner"
       ]
     },
     {
@@ -760,11 +749,6 @@
         "flutter",
         "path_provider_platform_interface"
       ]
-    },
-    {
-      "name": "ffi",
-      "version": "2.2.0",
-      "dependencies": []
     },
     {
       "name": "flutter_web_plugins",
@@ -935,21 +919,6 @@
       ]
     },
     {
-      "name": "file",
-      "version": "7.0.1",
-      "dependencies": [
-        "meta",
-        "path"
-      ]
-    },
-    {
-      "name": "time",
-      "version": "2.1.6",
-      "dependencies": [
-        "clock"
-      ]
-    },
-    {
       "name": "web_socket",
       "version": "1.0.1",
       "dependencies": [
@@ -970,6 +939,19 @@
         "string_scanner",
         "typed_data"
       ]
+    },
+    {
+      "name": "file",
+      "version": "7.0.1",
+      "dependencies": [
+        "meta",
+        "path"
+      ]
+    },
+    {
+      "name": "ffi",
+      "version": "2.2.0",
+      "dependencies": []
     },
     {
       "name": "plugin_platform_interface",
