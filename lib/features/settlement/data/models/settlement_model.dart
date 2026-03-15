@@ -1,20 +1,30 @@
-import 'package:isar/isar.dart';
+import 'package:hive/hive.dart';
 
 part 'settlement_model.g.dart';
 
-@collection
-class SettlementModel {
-  Id id = Isar.autoIncrement;
-
-  @Index(unique: true, replace: true)
+@HiveType(typeId: 3)
+class SettlementModel extends HiveObject {
+  @HiveField(0)
   late String uid;
 
+  @HiveField(1)
   late String groupId;
-  late String fromUserId;
-  late String toUserId;
-  late double amount;
-  String? proofImagePath; // local file path
 
+  @HiveField(2)
+  late String fromUserId;
+
+  @HiveField(3)
+  late String toUserId;
+
+  @HiveField(4)
+  late double amount;
+
+  @HiveField(5)
+  String? proofImagePath;
+
+  @HiveField(6)
   late DateTime createdAt;
-  DateTime? confirmedAt; // null = not yet confirmed
+
+  @HiveField(7)
+  DateTime? confirmedAt;
 }

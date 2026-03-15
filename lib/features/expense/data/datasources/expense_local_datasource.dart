@@ -1,45 +1,41 @@
+import 'dart:async';
 import 'dart:convert';
 
-import 'package:isar/isar.dart';
+import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../domain/entities/expense.dart';
 import '../models/expense_model.dart';
 
 class ExpenseLocalDatasource {
-  final Isar _isar;
-  ExpenseLocalDatasource(this._isar);
+  final Box<ExpenseModel> _expenseBox;
+  ExpenseLocalDatasource(this._expenseBox);
 
   Future<ExpenseModel> createExpense(Expense expense) async {
     await Future.delayed(const Duration(milliseconds: 500));
 
     final model = _toModel(expense);
-    await _isar.writeTxn(() async {
-      await _isar.expenseModels.put(model);
-    });
+    await _expenseBox.put(model.uid, model);
     return model;
   }
 
   Future<List<ExpenseModel>> getGroupExpenses(String groupId) async {
-    return _isar.expenseModels.filter().groupIdEqualTo(groupId).findAll();
+    return _expenseBox.values.where((e) => e.groupId == groupId).toList();
   }
 
   Future<ExpenseModel?> getExpenseById(String uid) async {
-    return _isar.expenseModels.filter().uidEqualTo(uid).findFirst();
+    return _expenseBox.get(uid);
   }
 
   Future<void> deleteExpense(String uid) async {
-    await _isar.writeTxn(() async {
-      final model = await _isar.expenseModels.filter().uidEqualTo(uid).findFirst();
-      if (model != null) await _isar.expenseModels.delete(model.id);
-    });
+    await _expenseBox.delete(uid);
   }
 
   Stream<List<ExpenseModel>> watchGroupExpenses(String groupId) {
-    return _isar.expenseModels
-        .filter()
-        .groupIdEqualTo(groupId)
-        .watch(fireImmediately: true);
+    // Hive listenable emits on any change to the box
+    return _expenseBox.watch().map((_) {
+      return _expenseBox.values.where((e) => e.groupId == groupId).toList();
+    });
   }
 
   ExpenseModel _toModel(Expense e) {

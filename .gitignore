@@ -1,2 +1,24 @@
+# Plan docs
 Plan/
 plan/
+
+# Dart/Flutter build artifacts
+.dart_tool/
+build/
+android/build/
+
+# Generated files
+*.g.dart
+
+# IDE
+.idea/
+
+# Logs
+*.log
+
+# Flutter generated plugin files
+linux/flutter/generated_plugin_registrant.cc
+linux/flutter/generated_plugins.cmake
+macos/Flutter/GeneratedPluginRegistrant.swift
+windows/flutter/generated_plugin_registrant.cc
+windows/flutter/generated_plugins.cmake

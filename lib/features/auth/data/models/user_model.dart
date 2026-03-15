@@ -1,22 +1,27 @@
-import 'package:isar/isar.dart';
+import 'package:hive/hive.dart';
 
 part 'user_model.g.dart';
 
-@collection
-class UserModel {
-  Id id = Isar.autoIncrement; // Auto-incrementing ID for Isar
+@HiveType(typeId: 0)
+class UserModel extends HiveObject {
+  @HiveField(0)
+  late String uid;
 
-  @Index(unique: true, replace: true)
-  late String uid; // UUID string used within the app logic
-
+  @HiveField(1)
   late String name;
+
+  @HiveField(2)
   late String email;
+
+  @HiveField(3)
   String? avatarUrl;
-  
-  // Bank Info (Simplified as strings)
+
+  @HiveField(4)
   String? bankName;
+
+  @HiveField(5)
   String? bankAccountNumber;
 
-  // Timestamps
+  @HiveField(6)
   late DateTime createdAt;
 }

@@ -1,23 +1,19 @@
 import 'dart:async';
 
-import 'package:isar/isar.dart';
+import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/user_model.dart';
 
-/// Simulates authentication via local Isar DB.
-/// No remote server or Firebase involved.
 class AuthLocalDatasource {
-  final Isar _isar;
+  final Box<UserModel> _userBox;
   static const String _mockPassword = 'password123';
 
-  // Holds the currently logged-in user's UID
   String? _currentUserUid;
 
-  AuthLocalDatasource(this._isar);
+  AuthLocalDatasource(this._userBox);
 
   Future<UserModel> signInWithEmail(String email, String password) async {
-    // Simulate network delay
     await Future.delayed(const Duration(milliseconds: 700));
 
     if (password != _mockPassword) {
@@ -25,19 +21,22 @@ class AuthLocalDatasource {
     }
 
     // Find or create user
-    UserModel? user = await _isar.userModels.filter().emailEqualTo(email).findFirst();
+    UserModel? user;
+    for (final u in _userBox.values) {
+      if (u.email == email) {
+        user = u;
+        break;
+      }
+    }
 
     if (user == null) {
-      // Auto-register new user
       user = UserModel()
         ..uid = const Uuid().v4()
         ..name = email.split('@').first
         ..email = email
         ..createdAt = DateTime.now();
 
-      await _isar.writeTxn(() async {
-        await _isar.userModels.put(user!);
-      });
+      await _userBox.put(user.uid, user);
     }
 
     _currentUserUid = user.uid;
@@ -46,7 +45,7 @@ class AuthLocalDatasource {
 
   Future<UserModel?> getCurrentUser() async {
     if (_currentUserUid == null) return null;
-    return _isar.userModels.filter().uidEqualTo(_currentUserUid!).findFirst();
+    return _userBox.get(_currentUserUid);
   }
 
   Future<void> signOut() async {

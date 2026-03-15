@@ -1,40 +1,36 @@
-import 'package:isar/isar.dart';
+import 'package:hive/hive.dart';
 
 part 'expense_model.g.dart';
 
-enum SplitMode { equal, byItem, percentage, custom }
-
-@collection
-class ExpenseModel {
-  Id id = Isar.autoIncrement;
-
-  @Index(unique: true, replace: true)
+@HiveType(typeId: 2)
+class ExpenseModel extends HiveObject {
+  @HiveField(0)
   late String uid;
 
+  @HiveField(1)
   late String groupId;
+
+  @HiveField(2)
   late String title;
+
+  @HiveField(3)
   late double totalAmount;
+
+  @HiveField(4)
   late String paidByUserId;
-  late String splitModeStr; // Store enum as string
-  
-  late List<String> itemsJson;   // JSON-encoded List<ItemModel>
-  late List<String> splitsJson;  // JSON-encoded List<SplitResultModel>
-  
-  String? receiptImagePath; // local file path
+
+  @HiveField(5)
+  late String splitModeStr;
+
+  @HiveField(6)
+  late List<String> itemsJson;
+
+  @HiveField(7)
+  late List<String> splitsJson;
+
+  @HiveField(8)
+  String? receiptImagePath;
+
+  @HiveField(9)
   late DateTime createdAt;
-}
-
-@embedded
-class ItemData {
-  late String id;
-  late String name;
-  late double price;
-  late List<String> assignedToUserIds;
-}
-
-@embedded
-class SplitData {
-  late String userId;
-  late double amount;
-  late double paid;
 }

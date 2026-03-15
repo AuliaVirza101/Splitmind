@@ -1,6 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:isar/isar.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'features/auth/data/datasources/auth_local_datasource.dart';
 import 'features/auth/data/models/user_model.dart';
@@ -19,6 +18,7 @@ import 'features/group/data/repositories/group_repository_impl.dart';
 import 'features/group/domain/repositories/group_repository.dart';
 import 'features/group/domain/usecases/group_usecases.dart';
 import 'features/settlement/data/datasources/settlement_local_datasource.dart';
+import 'features/settlement/data/models/settlement_model.dart';
 import 'features/settlement/data/repositories/settlement_repository_impl.dart';
 import 'features/settlement/domain/repositories/settlement_repository.dart';
 import 'features/settlement/domain/usecases/settlement_usecases.dart';
@@ -27,24 +27,24 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   // ---------------------------------------------------------------------------
-  // Isar Database
+  // Hive Database
   // ---------------------------------------------------------------------------
-  final dir = await getApplicationDocumentsDirectory();
-  final isar = await Isar.open(
-    [
-      UserModelSchema,
-      GroupModelSchema,
-      ExpenseModelSchema,
-      SettlementModelSchema,
-    ],
-    directory: dir.path,
-  );
-  sl.registerSingleton<Isar>(isar);
+  await Hive.initFlutter();
+
+  Hive.registerAdapter(UserModelAdapter());
+  Hive.registerAdapter(GroupModelAdapter());
+  Hive.registerAdapter(ExpenseModelAdapter());
+  Hive.registerAdapter(SettlementModelAdapter());
+
+  final userBox = await Hive.openBox<UserModel>('users');
+  final groupBox = await Hive.openBox<GroupModel>('groups');
+  final expenseBox = await Hive.openBox<ExpenseModel>('expenses');
+  final settlementBox = await Hive.openBox<SettlementModel>('settlements');
 
   // ---------------------------------------------------------------------------
   // Features - Auth
   // ---------------------------------------------------------------------------
-  sl.registerLazySingleton(() => AuthLocalDatasource(sl()));
+  sl.registerLazySingleton(() => AuthLocalDatasource(userBox));
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
   sl.registerLazySingleton(() => SignInWithEmail(sl()));
   sl.registerLazySingleton(() => GetCurrentUser(sl()));
@@ -53,7 +53,7 @@ Future<void> init() async {
   // ---------------------------------------------------------------------------
   // Features - Group
   // ---------------------------------------------------------------------------
-  sl.registerLazySingleton(() => GroupLocalDatasource(sl()));
+  sl.registerLazySingleton(() => GroupLocalDatasource(groupBox));
   sl.registerLazySingleton<GroupRepository>(() => GroupRepositoryImpl(sl()));
   sl.registerLazySingleton(() => CreateGroup(sl()));
   sl.registerLazySingleton(() => JoinGroup(sl()));
@@ -62,7 +62,7 @@ Future<void> init() async {
   // ---------------------------------------------------------------------------
   // Features - Expense & Splitting
   // ---------------------------------------------------------------------------
-  sl.registerLazySingleton(() => ExpenseLocalDatasource(sl()));
+  sl.registerLazySingleton(() => ExpenseLocalDatasource(expenseBox));
   sl.registerLazySingleton<ExpenseRepository>(() => ExpenseRepositoryImpl(sl()));
   sl.registerLazySingleton(() => CreateExpense(sl()));
   sl.registerLazySingleton(() => GetGroupExpenses(sl()));
@@ -73,7 +73,7 @@ Future<void> init() async {
   // ---------------------------------------------------------------------------
   // Features - Settlement
   // ---------------------------------------------------------------------------
-  sl.registerLazySingleton(() => SettlementLocalDatasource(sl()));
+  sl.registerLazySingleton(() => SettlementLocalDatasource(settlementBox));
   sl.registerLazySingleton<SettlementRepository>(() => SettlementRepositoryImpl(sl()));
   sl.registerLazySingleton(() => CreateSettlement(sl()));
   sl.registerLazySingleton(() => ConfirmSettlement(sl()));
